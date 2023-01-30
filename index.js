@@ -10,7 +10,7 @@ const bot = new slackBot({
 // Start handler
 
 bot.on('start', () => {
-    randomWorkout()
+    console.log('hello')
 })
 
 function randomWorkout(){
