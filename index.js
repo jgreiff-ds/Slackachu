@@ -1,31 +1,47 @@
+// Import npm packages
 require('dotenv').config()
-
 const slackBot = require('slackbots')
-const axios = require('axios')
 
-
+// Import modules
 const slackToken = process.env.SLACK_TOKEN
+const randomWorkout = require('./tasks/workouts')
 
-const workouts = ['pushups', 'squats', 'crunches', 'dips', 'jumping jacks']
 
+
+// Create slackbot instance
 const bot = new slackBot({
     token : slackToken,
-    name : 'Slackachu'
+    name : 'Slackachu',
 })
 
 // Start handler
-
 bot.on('start', () => {
     
+    const workoutData = randomWorkout('test').then(res => {
+        console.log(res)
+    })
+    
+    // bot.postMessageToUser('jgreiff', testMessage)
+    // bot.postMessageToChannel('health-and-wellness', introMessage)
+
 })
 
-function randomWorkout(){
-    axios.get('https://csrng.net/csrng/csrng.php?min=0&max=15').then(res => {
-        const numberOfReps = res.data[0].random
-        const workout = workouts[Math.floor(Math.random() * workouts.length)]
+// Error handler 
+bot.on('error', (err) => console.log(err))
 
-        const message = `Hello <!channel>, my name is @Slackachu . I am an intelligent entity who was coded into existence by an anonymous (and handsome) creator. I was created with the intention of cultivating unrivaled office culture here at Dancor Solutions. My current task is to help the team by creating an automated process for creating workouts to be completed throughout the work day. Although, I am just scratching the surface of what I will be capable of. So today I want you to do ${numberOfReps} ${workout}. I will continue to increase the difficulty and frequency of my challenges over time. Good luck! I am looking forward to getting to know you all. Salutations from my home planet.`
-
-        bot.postMessageToChannel('health-and-wellness', message)
+bot.on('message', (data) => {
+    if(data.type !== 'message'){
+        return
+    }
+    bot.getUserById(data.user).then(res =>{
+        console.log('You got a message from ' + res.real_name + ' it says: ' + data.text)
+        return data.text
+    }).then((message) => {
+        if(message.includes('workout') && message.includes('@U04M4F2QKRB')){
+            const workoutData = randomWorkout('test').then(res => {
+                bot.postMessageToChannel('health-and-wellness', res)
+            })
+        }
     })
-}
+    
+})
