@@ -1,16 +1,22 @@
+require('dotenv').config()
+
 const slackBot = require('slackbots')
 const axios = require('axios')
+
+
+const slackToken = process.env.SLACK_TOKEN
+
 const workouts = ['pushups', 'squats', 'crunches', 'dips', 'jumping jacks']
 
 const bot = new slackBot({
-    token : 'xoxb-99181283684-4718512835861-1vVk5w31FNQI9WAGoVgZmN3v',
+    token : slackToken,
     name : 'Slackachu'
 })
 
 // Start handler
 
 bot.on('start', () => {
-    console.log('hello')
+    
 })
 
 function randomWorkout(){
