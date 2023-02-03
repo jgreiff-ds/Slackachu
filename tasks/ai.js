@@ -2,15 +2,15 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
     require('dotenv').config()
     const slackBot = require('slackbots') 
     const { Configuration, OpenAIApi } = require('openai')
-
+    const bot = require('../index')
     const openaiKey = process.env.OPENAI_API_KEY
     const slackToken = process.env.SLACK_TOKEN
 
     // Create slackbot instance
-    const bot = new slackBot({
-        token : slackToken,
-        name : 'Slackachu',
-    })
+    // const bot = new slackBot({
+    //     token : slackToken,
+    //     name : 'Slackachu',
+    // })
 
     // Configure OpenAI
     const configuration = new Configuration({
