@@ -67,5 +67,8 @@ function messageHandler(data, channel) {
     }
 }
 
+function getChannelName(channel) {
+    
+}
 
 module.exports = bot
