@@ -38,7 +38,7 @@ bot.on('message', (data) => {
         return
     }
 
-    
+    // Attempting to get user data to send to get personalized messages
     // axios.get('https://slack.com/api/users.profile.get', 
     //          { headers: { Authorization: `Bearer ${process.env.SLACK_TOKEN}`} }
     //     ).then(res => {
