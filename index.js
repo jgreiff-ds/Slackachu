@@ -2,6 +2,8 @@
 require('dotenv').config()
 const slackBot = require('slackbots') 
 const axios = require('axios')
+const schedule = require('node-schedule')
+
 
 // Import modules
 const slackToken = process.env.SLACK_TOKEN
@@ -17,12 +19,29 @@ const bot = new slackBot({
 
 // Start handler
 bot.on('start', () => {
-    // bot.postMessageToChannel('bot-fun', 'I am awake now')
+    
+
+    const job1 = schedule.scheduleJob({hour: 11, minute: 0}, () => {
+        randomWorkout('text-only', 0, 'Good Morning!')
+        randomWorkout('test', 3)
+    });
+
+    const job2 = schedule.scheduleJob({hour: 1, minute: 0}, () => {
+        randomWorkout('text-only', 0, 'Good Afternoon!')
+        randomWorkout('test', 3)
+    });
+
+    const job3 = schedule.scheduleJob({hour: 3, minute: 0}, () => {
+        randomWorkout('text-only', 0, 'Good Afternoon! Good work today.')
+        randomWorkout('test', 3)
+    });
+
 })
 
-bot.on('disconnect', () => {
-    bot.postMessageToChannel('bot-fun', 'Disconnecting...')
-})
+// Doesn't work, need to find another way to prevent disconnect
+// bot.on('disconnect', () => {
+//     bot.postMessageToChannel('bot-fun', 'Disconnecting...')
+// })
 
 // Error handler 
 bot.on('error', (err) => {
@@ -34,6 +53,8 @@ bot.on('error', (err) => {
 // Message Handler
 bot.on('message', (data) => {
     
+    
+
     if(data.type !== 'message' || data.subtype === 'bot_message'){
         return
     }

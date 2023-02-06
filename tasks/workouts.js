@@ -1,4 +1,4 @@
-const randomWorkout = async function(context, numOfWorkouts){
+const randomWorkout = async function(context, numOfWorkouts, textMessage){
     // imports
     const axios = require('axios')
     const slackBot = require('slackbots') 
@@ -25,7 +25,7 @@ const randomWorkout = async function(context, numOfWorkouts){
             const numberOfReps = RNG(1, 15)
             const workout = workoutList[Math.floor(Math.random() * workoutList.length)]
             if(i === 0){
-                finalMessage += `Hello, do ${numberOfReps} ${workout}`
+                finalMessage += `Your workout do: ${numberOfReps} ${workout}`
             } else {
                 finalMessage += ` and ${numberOfReps} ${workout}`
             }
@@ -36,6 +36,8 @@ const randomWorkout = async function(context, numOfWorkouts){
             bot.postMessageToChannel('health-and-wellness', '<!channel> ' + finalMessage)
         } else if(context === 'intro'){
             return introMessage
+        } else if(context === 'text-only'){
+            bot.postMessageToChannel('health-and-wellness', textMessage)
         }
 
 
