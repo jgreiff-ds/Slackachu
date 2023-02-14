@@ -4,12 +4,12 @@ const slackBot = require('slackbots')
 const axios = require('axios')
 const schedule = require('node-schedule')
 
-
 // Import modules
 const slackToken = process.env.SLACK_TOKEN
 const randomWorkout = require('./tasks/workouts')
 const aiResponse = require('./tasks/ai')
-
+const workoutRoutes = require('./routes/workoutRoutes')
+const bingo = require('./tasks/bingo')
 
 // Create slackbot instance
 const bot = new slackBot({
@@ -17,25 +17,24 @@ const bot = new slackBot({
     name : 'Slackachu',
 })
 
+const job1 = schedule.scheduleJob({hour: 11, minute: 0}, () => {
+    randomWorkout('text-only', 0, 'Good Morning!')
+    randomWorkout('test', 3)
+});
+
+const job2 = schedule.scheduleJob({hour: 13, minute: 0}, () => {
+    randomWorkout('text-only', 0, 'Good Afternoon!')
+    randomWorkout('test', 3)
+});
+
+const job3 = schedule.scheduleJob({hour: 15, minute: 3}, () => {
+    randomWorkout('text-only', 0, 'Good Afternoon! Good work today.')
+    randomWorkout('test', 3)
+});
+
 // Start handler
 bot.on('start', () => {
-    
-
-    const job1 = schedule.scheduleJob({hour: 11, minute: 0}, () => {
-        randomWorkout('text-only', 0, 'Good Morning!')
-        randomWorkout('test', 3)
-    });
-
-    const job2 = schedule.scheduleJob({hour: 1, minute: 0}, () => {
-        randomWorkout('text-only', 0, 'Good Afternoon!')
-        randomWorkout('test', 3)
-    });
-
-    const job3 = schedule.scheduleJob({hour: 3, minute: 0}, () => {
-        randomWorkout('text-only', 0, 'Good Afternoon! Good work today.')
-        randomWorkout('test', 3)
-    });
-
+   
 })
 
 // Doesn't work, need to find another way to prevent disconnect
@@ -52,13 +51,13 @@ bot.on('error', (err) => {
 
 // Message Handler
 bot.on('message', (data) => {
-    
-    
 
     if(data.type !== 'message' || data.subtype === 'bot_message'){
-        return
+        if(data.type !== 'reaction_added') {
+            return
+        }
     }
-
+    
     // Attempting to get user data to send to get personalized messages
     // axios.get('https://slack.com/api/users.profile.get', 
     //          { headers: { Authorization: `Bearer ${process.env.SLACK_TOKEN}`} }
@@ -68,13 +67,15 @@ bot.on('message', (data) => {
 
     bot.getChannels().then(res => {
         const channelsArr = res.channels
-        const result = channelsArr.find(x => x.id === data.channel).name
+        const result = channelsArr.find(x => x.id === data.channel)
         messageHandler(data, result)
+    }).catch(err => {
+        console.log(err)
     })
 })
 
 function messageHandler(data, channel) {
-    const message = data.text
+    const message = data.text || ''
     if(message.includes('workout') && message.includes('@U04M4F2QKRB')){
         const parsedMessage = message.split(' ').slice(1).join('')
         const numOfWorkouts = parsedMessage.replace(/\D/g, "")
@@ -83,7 +84,12 @@ function messageHandler(data, channel) {
         aiResponse(message, channel, 'picture')
     } else if(message.includes('ignore')) {
         return
-    } else {
+    } else if(data.type === 'reaction_added' && data.reaction === 'white_check_mark') {
+        workoutRoutes(data.user)
+    } else if(message.includes('bingo')) {
+        bingo()
+    }
+    else {
         aiResponse(message, channel, 'prompt')
     }
 }

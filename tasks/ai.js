@@ -29,7 +29,7 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
         }).then(res => {
             const finalMessage = res.data.choices[0].text
             console.log(finalMessage)
-            bot.postMessage(channel, finalMessage)
+            bot.postMessage(channel.name, finalMessage)
         }).catch(err => console.log(err))
     } else if(context === "picture") {
         const response = openai.createImage({

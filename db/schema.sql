@@ -1,0 +1,46 @@
+-- //source db/schema.sql
+DROP TABLE IF EXISTS workouts;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS bingos;
+
+CREATE TABLE users (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    slackid VARCHAR(25),
+    fname VARCHAR(50),
+    lname VARCHAR(50)
+);
+
+
+CREATE TABLE workouts (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    slackuser VARCHAR(25),
+    completed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE bingos (
+    B_1 INTEGER,
+    B_2 INTEGER,
+    B_3 INTEGER,
+    B_4 INTEGER,
+    B_5 INTEGER,
+    I_1 INTEGER,
+    I_2 INTEGER,
+    I_3 INTEGER,
+    I_4 INTEGER,
+    I_5 INTEGER,
+    N_1 INTEGER,
+    N_2 INTEGER,
+    N_3 INTEGER,
+    N_4 INTEGER,
+    G_1 INTEGER,
+    G_2 INTEGER,
+    G_3 INTEGER,
+    G_4 INTEGER,
+    G_5 INTEGER,
+    O_1 INTEGER,
+    O_2 INTEGER,
+    O_3 INTEGER,
+    O_4 INTEGER,
+    O_5 INTEGER
+);
+    

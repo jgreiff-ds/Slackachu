@@ -22,10 +22,10 @@ const randomWorkout = async function(context, numOfWorkouts, textMessage){
         }
 
         for(let i = 0; i<numOfWorkouts; i++){
-            const numberOfReps = RNG(1, 15)
+            const numberOfReps = RNG(5, 15)
             const workout = workoutList[Math.floor(Math.random() * workoutList.length)]
             if(i === 0){
-                finalMessage += `Your workout do: ${numberOfReps} ${workout}`
+                finalMessage += `Your workout: ${numberOfReps} ${workout}`
             } else {
                 finalMessage += ` and ${numberOfReps} ${workout}`
             }
