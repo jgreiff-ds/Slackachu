@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Connect to sequelize
-sequelize.sync({ force: false }).then(() => {
+db.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now Listening'))
 })
 
