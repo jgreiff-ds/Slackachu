@@ -3,6 +3,7 @@ require('dotenv').config()
 const slackBot = require('slackbots') 
 const axios = require('axios')
 const schedule = require('node-schedule')
+const express = require('express')
 
 // Import modules
 const slackToken = process.env.SLACK_TOKEN
