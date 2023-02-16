@@ -11,11 +11,24 @@ const randomWorkout = require('./tasks/workouts')
 const aiResponse = require('./tasks/ai')
 const workoutRoutes = require('./routes/workoutRoutes')
 const bingo = require('./tasks/bingo')
+const db = require('./db/connection')
 
 // Create slackbot instance
 const bot = new slackBot({
     token : slackToken,
     name : 'Slackachu',
+})
+
+// Initialize routing
+const app = express()
+const PORT = process.env.PORT || 3001
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')))
+
+// Connect to sequelize
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log('Now Listening'))
 })
 
 const job1 = schedule.scheduleJob({hour: 11, minute: 0}, () => {
