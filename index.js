@@ -76,8 +76,8 @@ bot.on('message', (data) => {
             return
         }
     }
-    
-    if(data.user ===  'U04M4F2QKRB'){
+    console.log(data.user)
+    if(data.user === 'U04M4F2QKRB'){
         return
     }
     
