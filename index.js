@@ -77,13 +77,17 @@ bot.on('message', (data) => {
         }
     }
     
+    if(data.user ===  'U04M4F2QKRB'){
+        return
+    }
+    
     // Attempting to get user data to send to get personalized messages
     // axios.get('https://slack.com/api/users.profile.get', 
     //          { headers: { Authorization: `Bearer ${process.env.SLACK_TOKEN}`} }
     //     ).then(res => {
     //     console.log(res.data)
     // })
-    console.log('hit')
+    
     bot.getChannels().then(res => {
         const channelsArr = res.channels
         const result = channelsArr.find(x => x.id === data.channel)
@@ -95,9 +99,7 @@ bot.on('message', (data) => {
 
 function messageHandler(data, channel) {
     const message = data.text || ''
-    if(data.user ===  'U04M4F2QKRB'){
-        return
-    }
+    
     if(message.includes('workout') && message.includes('@U04M4F2QKRB')){
         const parsedMessage = message.split(' ').slice(1).join('')
         const numOfWorkouts = parsedMessage.replace(/\D/g, "")
