@@ -37,6 +37,7 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
             n: 1,
             size: "1024x1024",
         }).then(res => {
+            console.log(res)
             const photo = res.data.data[0].url
             bot.postMessage(channel, 'Here you go: '+ photo)
         }).catch(err => console.log(err))
