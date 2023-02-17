@@ -27,5 +27,7 @@ Slackbot js docs - https://github.com/mishk0/slack-bot-api
 OpenAI docs - https://platform.openai.com/docs/api-reference/completions/create  
 Slack API - https://api.slack.com/docs
 Node-Schedule - https://www.npmjs.com/package/node-schedule 
+Sequelize - https://sequelize.org/ 
+Express - https://expressjs.com/ 
 
 MYSQL SETUP - https://maithegeek.medium.com/install-mysql-on-macos-11-big-sur-bad07c062171 

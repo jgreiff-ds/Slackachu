@@ -32,17 +32,19 @@ db.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now Listening'))
 })
 
-const job1 = schedule.scheduleJob({hour: 11, minute: 0}, () => {
+
+// Schedules workouts
+const job1 = schedule.scheduleJob({hour: 11, minute: 0, tz: 'America/New_York'}, () => {
     randomWorkout('text-only', 0, 'Good Morning!')
     randomWorkout('test', 3)
 });
 
-const job2 = schedule.scheduleJob({hour: 13, minute: 0}, () => {
+const job2 = schedule.scheduleJob({hour: 13, minute: 0, tz: 'America/New_York'}, () => {
     randomWorkout('text-only', 0, 'Good Afternoon!')
     randomWorkout('test', 3)
 });
 
-const job3 = schedule.scheduleJob({hour: 15, minute: 3}, () => {
+const job3 = schedule.scheduleJob({hour: 15, minute: 3, tz: 'America/New_York'}, () => {
     randomWorkout('text-only', 0, 'Good Afternoon! Good work today.')
     randomWorkout('test', 3)
 });
