@@ -72,6 +72,8 @@ bot.on('message', (data) => {
     if(data.type !== 'message' || data.subtype === 'bot_message'){
         if(data.type !== 'reaction_added') {
             return
+        } else {
+            return
         }
     }
     
