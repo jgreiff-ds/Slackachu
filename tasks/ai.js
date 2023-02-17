@@ -24,7 +24,7 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
         const response = openai.createCompletion({
             model: "text-davinci-003",
             prompt: promptReceived,
-            max_tokens: 100,
+            max_tokens: 1042,
             temperature: 0,
         }).then(res => {
             const finalMessage = res.data.choices[0].text
