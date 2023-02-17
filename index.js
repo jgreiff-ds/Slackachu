@@ -76,7 +76,7 @@ bot.on('message', (data) => {
             return
         }
     }
-    console.log(data.message.username)
+    console.log(data.message)
     if(data.message.username === 'Slackachu'){
         return
     }
