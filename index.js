@@ -76,10 +76,10 @@ bot.on('message', (data) => {
             return
         }
     }
-    console.log(data.message)
-    if(data.message.username === 'Slackachu'){
-        return
-    }
+    console.log(data)
+    // if(data.message.username === 'Slackachu'){
+    //     return
+    // }
     
     // Attempting to get user data to send to get personalized messages
     // axios.get('https://slack.com/api/users.profile.get', 
