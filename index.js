@@ -34,7 +34,7 @@ db.sync({ force: false }).then(() => {
 
 
 // Schedules workouts
-const job1 = schedule.scheduleJob({hour: 11, minute: 58, tz: 'America/New_York'}, () => {
+const job1 = schedule.scheduleJob({hour: 11, minute: 0, tz: 'America/New_York'}, () => {
     randomWorkout('text-only', 0, 'Good Morning!')
     randomWorkout('test', 3)
 });
