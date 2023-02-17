@@ -83,7 +83,7 @@ bot.on('message', (data) => {
     //     ).then(res => {
     //     console.log(res.data)
     // })
-
+    console.log('hit')
     bot.getChannels().then(res => {
         const channelsArr = res.channels
         const result = channelsArr.find(x => x.id === data.channel)
