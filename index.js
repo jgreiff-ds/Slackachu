@@ -93,6 +93,7 @@ bot.on('message', (data) => {
 
 function messageHandler(data, channel) {
     const message = data.text || ''
+    console.log(data)
     if(message.includes('workout') && message.includes('@U04M4F2QKRB')){
         const parsedMessage = message.split(' ').slice(1).join('')
         const numOfWorkouts = parsedMessage.replace(/\D/g, "")
