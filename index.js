@@ -93,7 +93,7 @@ bot.on('message', (data) => {
 
 function messageHandler(data, channel) {
     const message = data.text || ''
-    if(data.user ===  '@U04M4F2QKRB'){
+    if(data.user ===  'U04M4F2QKRB'){
         return
     }
     if(message.includes('workout') && message.includes('@U04M4F2QKRB')){
