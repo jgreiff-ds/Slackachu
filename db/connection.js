@@ -7,7 +7,7 @@ let db
 if(process.env.JAWSDB_URL){
     db = new Sequelize(process.env.JAWSDB_URL)
 }else{
-    db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW,{
+    db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS,{
         host: 'localhost',
         dialect: 'mysql',
         port: 3306
