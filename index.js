@@ -50,8 +50,14 @@ const job3 = schedule.scheduleJob({hour: 15, minute: 3, tz: 'America/New_York'},
 });
 
 // Start handler
-bot.on('start', () => {
-   
+bot.on('close', () => {
+    bot.postMessageToChannel('bot-fun', 'Disconnecting...')
+    console.log('closed')
+
+        const bot = new slackBot({
+        token : slackToken,
+        name : 'Slackachu',
+        })
 })
 
 // Doesn't work, need to find another way to prevent disconnect
