@@ -7,10 +7,10 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
     const slackToken = process.env.SLACK_TOKEN
 
     // Create slackbot instance
-    // const bot = new slackBot({
-    //     token : slackToken,
-    //     name : 'Slackachu',
-    // })
+    const bot = new slackBot({
+        token : slackToken,
+        name : 'Slackachu',
+    })
 
     // Configure OpenAI
     const configuration = new Configuration({
