@@ -32,6 +32,7 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
             bot.postMessage(channel.name, finalMessage)
         }).catch(err => console.log(err))
     } else if(context === "picture") {
+        promptReceived.replace("picture of", "")
         const response = openai.createImage({
             prompt: promptReceived,
             n: 1,
