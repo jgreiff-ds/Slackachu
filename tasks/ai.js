@@ -7,10 +7,10 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
     const slackToken = process.env.SLACK_TOKEN
 
     // Create slackbot instance
-    const bot = new slackBot({
-        token : slackToken,
-        name : 'Slackachu',
-    })
+    // const bot = new slackBot({
+    //     token : slackToken,
+    //     name : 'Slackachu',
+    // })
 
     // Configure OpenAI
     const configuration = new Configuration({
@@ -32,9 +32,10 @@ const aiResponse = async function aiResponse(promptReceived, channel, context) {
             bot.postMessage(channel.name, finalMessage)
         }).catch(err => console.log(err))
     } else if(context === "picture") {
-        // promptReceived.replace("picture of", "")
+        let promptUsed = promptReceived.replace(/picture of /g, "") || promptReceived.replace(/picture /g, "")
+        console.log(promptUsed)
         const response = openai.createImage({
-            prompt: promptReceived,
+            prompt: promptUsed,
             n: 1,
             size: "1024x1024",
         }).then(res => {
